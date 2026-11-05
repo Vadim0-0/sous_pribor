@@ -23,7 +23,7 @@ services:
         condition: service_healthy
     environment:
       OLLAMA_HOST: http://ollama:11434
-      AI_MODEL: ${AI_MODEL:-qwen2.5:3b}
+      AI_MODEL: ${AI_MODEL}
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
@@ -41,7 +41,7 @@ services:
       # AI
       AI_ENABLED: ${AI_ENABLED:-true}
       AI_BASE_URL: http://ollama:11434
-      AI_MODEL: ${AI_MODEL:-qwen2.5:3b}
+      AI_MODEL: ${AI_MODEL}
       AI_TIMEOUT_SECONDS: ${AI_TIMEOUT_SECONDS:-180}
 
       PRODUCT_DATA_URL: ${PRODUCT_DATA_URL}
