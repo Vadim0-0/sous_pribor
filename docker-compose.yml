@@ -1,0 +1,89 @@
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: sous_pribor_ollama
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+    expose:
+      - "11434"
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: sous_pribor_ollama_init
+    restart: "no"
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      AI_MODEL: qwen2.5:3b
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Waiting for Ollama..."
+        until ollama list >/dev/null 2>&1; do sleep 2; done
+        echo "Pulling model: $$AI_MODEL"
+        ollama pull "$$AI_MODEL"
+        echo "Done."
+  
+  api:
+    build: ./api
+    container_name: sous_pribor_api
+    restart: unless-stopped
+    environment:
+      # AI
+      AI_ENABLED: ${AI_ENABLED:-true}
+      AI_BASE_URL: http://ollama:11434
+      AI_MODEL: ${AI_MODEL:-qwen2.5:3b}
+      AI_TIMEOUT_SECONDS: ${AI_TIMEOUT_SECONDS:-180}
+
+      PRODUCT_DATA_URL: ${PRODUCT_DATA_URL}
+
+    depends_on:
+      ollama:
+        condition: service_started
+    expose:
+      - "8000"
+  
+  web:
+    build:
+      context: ./web
+      target: production
+      args:
+        NUXT_PUBLIC_API_BASE: ${NUXT_PUBLIC_API_BASE} 
+    container_name: sous_pribor_web
+    restart: unless-stopped
+    environment:
+      NUXT_PUBLIC_API_BASE: ${NUXT_PUBLIC_API_BASE}
+      HOST: 0.0.0.0
+      PORT: 3000
+    expose:
+      - "3000"
+    depends_on:
+      - api
+    networks:
+      - default
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: sous_pribor_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - api
+      - web
+    networks:
+      - default
+
+volumes:
+  ollama_data:
