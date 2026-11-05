@@ -1,0 +1,31 @@
+.ui-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 12px 10px;
+
+  background-color: var(--color-primary);
+  border-radius: 5px;
+
+  & p {
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    font-weight: 400;
+    line-height: var(--line-height-tight);
+    color: var(--color-text-button);
+    transition: color 0.3s ease-in-out;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-primary-hover);
+    }
+  }
+}

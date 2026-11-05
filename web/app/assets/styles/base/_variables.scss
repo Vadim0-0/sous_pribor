@@ -1,0 +1,63 @@
+:root {
+  --font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  --second-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+:root {
+  --font-size-xs: 12px; 
+  --font-size-sm: 14px; 
+  --font-size-md: 16px; 
+  --font-size-lg: 18px; 
+  --font-size-xl: 20px; 
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 40px;
+
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.65;
+}
+
+:root {
+  --color-bg: #F5F2EB;
+  --color-bg-soft: #EDE9DF;
+  --color-surface: #FFFCF6;
+  --color-surface-hover: #F2EEE5;
+  --color-input: #F0EDE5;
+
+  --color-border: #DDD7CA;
+  --color-border-soft: #EAE5DB;
+
+  --color-text: #39372F;
+  --color-text-secondary: #777467;
+  --color-text-muted: #A29D90;
+  --color-text-button: #fff;
+
+  --color-primary: #C4B69A;
+  --color-primary-hover: #B5A586;
+  --color-primary-soft: rgba(196, 182, 154, 0.18);
+  --color-on-primary: #302A20;
+
+  --color-accent: #9EAE9B;
+  --color-accent-soft: rgba(158, 174, 155, 0.18);
+
+  --color-success: #82977B;
+  --color-success-soft: rgba(130, 151, 123, 0.14);
+
+  --color-warning: #C6A36D;
+  --color-warning-soft: rgba(198, 163, 109, 0.15);
+
+  --color-error: #C98279;
+  --color-error-soft: rgba(201, 130, 121, 0.14);
+}

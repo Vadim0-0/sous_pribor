@@ -1,0 +1,113 @@
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+html {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  height: 100%;
+  background-color: var(--bg);
+
+  &.is-loading {
+    overflow: hidden;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+
+  &.stop {
+    overflow: hidden;
+  }
+}
+
+img {
+  max-width: 100%;
+  pointer-events: none;
+  object-fit: cover;
+}
+
+a {
+  user-drag: none;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+
+  & svg {
+    transition: all 0.3s ease-in-out;
+
+  }
+}
+
+button {
+  font-family: var(--font-family);
+  transition: all 0.3s ease-in-out;
+
+  & svg {
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+input {
+
+  &::placeholder {
+    opacity: 1;
+  }
+
+  &.error {
+    color: var(--color-error);
+
+    &::-webkit-input-placeholder {
+      color: var(--color-error);
+    }
+
+    &::-moz-placeholder {
+      color: var(--color-error);
+    }
+
+    &:-ms-input-placeholder {
+      color: var(--color-error);
+    }
+
+    &::-ms-input-placeholder {
+      color: var(--color-error);
+    }
+
+    &::placeholder {
+      color: var(--color-error);
+    }
+  }
+}
+
+#__nuxt {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
